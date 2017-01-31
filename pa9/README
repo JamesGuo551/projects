@@ -1,0 +1,28 @@
+/*
+ * Name: Yipeng Guo
+ * Login: cs11fadl 
+ * Date: November 21, 2016
+ * File:  README
+ * Sources of Help: 
+ *
+ * This program is the README for pa9
+ */
+
+program description:
+The first program will use a turtle pen to write out "cs11fadl java 2016 UC San
+Diego" over three lines. Every letter/number will be drawn at the same time. Thesecond file takes an argument in the command line in the form java power BASE
+EXPONENT. If you do it wrong, the program will tell you how to type it 
+correctly. This program will raise the base to the exponent and print out the
+result plus the number of multiplications it took to get there. Power1 takes
+EXPONENT number of multiplications but POWER2 takes significantly fewer when
+the exponent increases alot.
+
+Unix Questions:
+1. cat -n readFile
+2. cat -T readFile
+3. nl readFile
+4. :set number
+5. :set list
+6. :%s/amazing/amazing
+7. It will double the number of multiplications for Power1.
+8. It will increase the number of multiplications for Power2 by 1.

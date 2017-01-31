@@ -1,0 +1,21 @@
+README
+
+Description: My palindrome program takes in some text file to run. This is
+done in the command line by putting java PA7indrome "text file name" The
+program then goes through the text file and checks if it is a palindrome or
+not. Afterwards, it will print out whether or not the file is a palindrome.
+My spin wheel program opens up two wheels on a canvas and then you can click
+buttons to play a game. Click the spin player one button to start player one's
+turn. If you go over 100 points, then it becomes player two's turn. Player
+two does the same. Either player can also press their finish turn button to
+end their turn prematurely. After player two is finished, whoever is closest
+to 100 points will win. If both players are over 100 points, then it is a tie.
+Points are added when the red cursor lands on an image after the wheel stops
+spinning. The number it lands on is how many points you get. You can always
+press restart to start the game over.
+
+1. first set tabstop=2, then >N>. to deindent, <N<
+2. >aB to indent, <aB to deindent
+3. o
+4. some unix command > output (output is the output file)
+5. array = new int[]{1, 3, 5, 7, 9};

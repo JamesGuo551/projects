@@ -1,0 +1,205 @@
+import objectdraw.*;
+import java.awt.Color;
+import java.util.*;
+import java.awt.event.*;
+
+/**
+ * Represents the Snake object on the canvas.
+ */
+public class Snake extends ActiveObject {
+    int delay, size, maxFood, xRandom, yRandom;
+    int boundary = 50;
+    int move = 50;
+    int eat = 10;
+    ArrayList<FilledRect> snake = new ArrayList <>();
+    public static final int HALF = 2;
+    public static final int SEG_SIZE = 50;
+    SnakeController controller;
+    DrawingCanvas canvas;
+    int even = 2;
+    int up = 1;
+    int right = 2;
+    int down = 3;
+    int left = 4;
+    int crash = 3; //snake must be next to 3rd body or higher to crash
+    int crashThreshold = 4; //snake must be at least 5 length to crash
+    FilledOval food;
+    Location oddLoc, evenLoc, foodLoc;
+    boolean alive = true;
+    boolean wall = false;
+    boolean noFood = true;
+    Random generator = new Random();
+    // TODO Add your instance variables here
+
+    public Snake( DrawingCanvas canvas, Location start, int delay,
+                  SnakeController controller, int maxFood) {
+      FilledRect head = new FilledRect(start, SEG_SIZE, SEG_SIZE, canvas);
+      head.setColor(Color.LIGHT_GRAY);
+      this.delay = delay;
+      this.controller = controller;
+      this.canvas = canvas;
+      this.maxFood = maxFood;
+      size = 1;
+      snake.add(head);
+      start();
+    }
+
+    public void run() {
+      while(alive) {
+	if(size == maxFood) {
+	  controller.showWin();
+	  alive = false;
+	  return;
+	}
+	if(noFood) {
+	  placeFood();
+	}
+	grow();
+	if(snake.get(0).getLocation().getX() == 0 || 
+	   snake.get(0).getLocation().getY() == 0 || 
+	   snake.get(0).getLocation().getX() == controller.windowWidth
+            - boundary || snake.get(0).getLocation().getY() == 
+	    controller.windowHeight - boundary) {
+          wall = true;
+	} else {
+	  wall = false;
+	}
+	pause(delay);	      
+	if(controller.direction == up) {
+	  if(snake.get(0).getLocation().getY() == 0 && wall == true && 
+	     !controller.pause) {
+	    alive = false;
+	    controller.showLose();
+	    return;
+	  }
+	  move(0, -move);
+	  for(int x = crash; x < snake.size(); x++) {
+	    if(snake.get(0).getLocation().equals(snake.get(x).getLocation()) && 
+	       size > crashThreshold) {
+	      alive = false;
+	      controller.showLose();
+	      move(0, move);
+	      return;
+	    }
+	  }
+	  bodyMove();
+	} 
+	if(controller.direction == left) {
+	  System.out.print(left);	
+	  if(snake.get(0).getLocation().getX() == 0 && wall == true && 
+	     !controller.pause) {
+	    alive = false;
+	    controller.showLose();
+	    return;
+	  }
+	  move(-move, 0);
+	  for(int x = crash; x < snake.size(); x++) {
+	    if(snake.get(0).getLocation().equals(snake.get(x).getLocation()) && 
+	       size > crashThreshold) {
+	      alive = false;
+	      controller.showLose();
+	      move(move, 0);
+	      return;
+	    }
+	  }
+	  bodyMove();
+	}
+	if(controller.direction == right) {
+	  if(snake.get(0).getLocation().getX() == controller.windowWidth
+             - boundary && wall == true && !controller.pause) {
+	    alive = false;
+	    controller.showLose();
+	    return;
+	  }
+	  move(move, 0);
+	  for(int x = crash; x < snake.size(); x++) {
+	    if(snake.get(0).getLocation().equals(snake.get(x).getLocation()) && 
+	       size > crashThreshold) {
+	      alive = false;
+	      controller.showLose();
+	      move(-move, 0);
+	      return;
+	    }
+	  }
+	  bodyMove();
+	}
+	if(controller.direction == down) {
+	  if(snake.get(0).getLocation().getY() == controller.windowHeight
+             - boundary && wall == true && !controller.pause) {
+	    alive = false;
+	    controller.showLose();
+	    return;
+	  }
+	  move(0, move);
+	  for(int x = crash; x < snake.size(); x++) {
+	    if(snake.get(0).getLocation().equals(snake.get(x).getLocation()) && 
+	       size > crashThreshold) {
+	      alive = false;
+	      controller.showLose();
+	      move(0, -move);
+	      return;
+	    }
+	  }
+	  bodyMove();
+        }
+      }
+    }
+    
+    public void placeFood() {
+      xRandom = generator.nextInt(controller.xPositions);
+      yRandom = generator.nextInt(controller.yPositions);
+      foodLoc = new Location ((double)xRandom * SEG_SIZE, (double)yRandom * 
+      SEG_SIZE);
+      for(int x = 0; x < snake.size(); x++) {	  
+	if(snake.get(x).getLocation().equals(foodLoc)) {
+	  placeFood();
+	  return;
+	}
+      }    
+      food = new FilledOval(foodLoc, SEG_SIZE, SEG_SIZE, canvas);
+      food.setColor(Color.ORANGE);
+      noFood = false;
+    }
+    
+
+    private synchronized void move(double dx, double dy) {
+      if(controller.pause) {
+        return;
+      }	    
+      evenLoc = new Location(snake.get(0).getLocation());
+      snake.get(0).move(dx, dy);
+    }
+
+    private void bodyMove() {
+      if(controller.pause) {
+        return;
+      }
+      if(alive) {
+        for(int x = 1; x < snake.size(); x++) {
+	  if(x % even == 1) {
+	    oddLoc = snake.get(x).getLocation();
+	    snake.get(x).moveTo(evenLoc);
+  	  } else {
+      	    evenLoc = snake.get(x).getLocation();
+	    snake.get(x).moveTo(oddLoc);
+	  }	  
+        }
+      }
+    }
+
+    public void grow() {
+      if(snake.get(0).getLocation().equals(food.getLocation())) {
+	food.removeFromCanvas();
+      	FilledRect body = new FilledRect(snake.get(size-1).getLocation(), 
+	SEG_SIZE, SEG_SIZE, canvas);
+        body.setColor(Color.WHITE); 
+        size++;
+	controller.score += eat;
+	controller.changeScore();
+        snake.add(body);
+        noFood = true;	
+      }      
+    }
+    // TODO Add more functionality + helper functions
+
+} // end of class Snake

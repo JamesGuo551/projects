@@ -1,0 +1,79 @@
+/*
+ * Name: Yipeng Guo
+ * Login: cs11fadl 
+ * Date: October 18, 2016
+ * File: CosmicSphereController.java
+ * Sources of Help: Object draw website with all the methods
+ *
+ * This program makes cosmic spheres and changes their colors.
+ */
+
+import objectdraw.*;
+import java.awt.*;
+
+/**
+ * This class defines all the variables and runs the methods for each
+ * function of the cosmic spheres.
+ */
+public class CosmicSphereController extends WindowController {
+  private Line xLine, yLine;
+  private static final int CANVAS_WIDTH = 600;
+  private static final int CANVAS_HEIGHT = 600;
+  private static final int lineStart = 300;
+  private static final int lineEnd = 600;
+  int checkPress = 0;
+  int xPressed = 1;
+  int yPressed = 2;
+  int bothPressed = 3;
+  private CosmicSphere sphere;
+  int size = 50;
+  
+  public void begin() {
+    xLine = new Line(0, lineStart, lineEnd, lineStart, canvas);
+    yLine = new Line(lineStart, 0, lineStart, lineEnd, canvas);
+  }
+  
+  public void onMousePress(Location point) {
+    if(xLine.contains(point) && yLine.contains(point)) {
+      checkPress = bothPressed;
+    } else if(xLine.contains(point)) {
+      checkPress = xPressed;
+    } else if(yLine.contains(point)) {
+      checkPress = yPressed;
+    } 
+  }
+
+  public void onMouseDrag(Location point) {
+    if(point.getX() < canvas.getHeight()-4 && point.getX() > 4
+       && point.getY() < canvas.getWidth()-4 && point.getY() > 4) {
+      if(checkPress == bothPressed) {
+        xLine.moveTo(0, point.getY());
+        yLine.moveTo(point.getX(), 0);
+      } else if(checkPress == xPressed) {
+        xLine.moveTo(0, point.getY());
+      } else if(checkPress == yPressed) {
+        yLine.moveTo(point.getX(), 0);
+      }
+    }
+  } 
+
+  public void onMouseClick(Location point) {
+    sphere = new CosmicSphere(point.getX(), point.getY(), size, canvas,
+		                    xLine, yLine);
+  }
+
+  public void onMouseRelease(Location point) {
+    checkPress = 0;
+  }
+
+  public void paint(java.awt.Graphics g) {
+    super.paint(g);
+    xLine.setEnd(canvas.getWidth(), (xLine.getStart()).getY());
+    yLine.setEnd((yLine.getStart()).getX(), canvas.getHeight());
+  } 
+
+  public static void main(String[] args) {
+    new Acme.MainFrame(new CosmicSphereController(), args, CANVAS_WIDTH,
+    CANVAS_HEIGHT);
+  }
+}

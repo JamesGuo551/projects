@@ -1,0 +1,26 @@
+//README
+
+Description: The following program is the game snake. To play, you must type in the command as specified with the correct dimensions to set your preferences. If you put in the wrong numbers then the command window will prompt you with 
+instructions. To move around you use the arrow keys and try not to crash into
+a wall. To get points, eat food and grow until you can grow no more. If you want
+to pause or unpause, just press the space bar. The game is simple, just like
+any other game of snake youve played before.
+
+1. I maintained my integrity by working alone and only asking tutors if I neededany help. I looked up generic commands and stuff and nothing specific to the
+assignment.
+2. She can have specific methods to draw each shape, then have one method to set
+the size, and one method to set the color. This way she wont have to make a 
+method for five different colors and sizes of circles but can instead just have
+three to accomplish the same thing. She should make the class static and all
+the methods public so other programs can take from this class and draw stuff.
+Or she can just use the objectdraw library like a normal person would.
+3. Methods of a java interface are abstract and cannot be implemented. A java 
+abstract class can have instance methods that implements a default behavior.
+Members of a java interface are public by default. A java abstract class can 
+have public, private, protected and such.
+4. Interfaces and abstract classes cannot be instantiated. We can declare an
+interface with the interface keyword and abstract class with the abstract
+keyword.
+5. :args *.java
+   :tab all  will open all java files in current directory
+6. sudo mkdir -p foodDir/barDir

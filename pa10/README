@@ -1,0 +1,22 @@
+/*
+ * Name: Yipeng Guo
+ * Login: cs11fadl 
+ * Date: December 1, 2016
+ * File: README
+ * Sources of Help: Object draw website with all the methods
+ *
+ * This is my pa10 README 
+ */
+
+1. I looked up how to use the object draw library and also how inheritance and
+polymorphism works. This maintained my integrity because I did not look up any
+specific answers. I just looked up explanations for how stuff works. Any 
+answers or ideas were of my own.
+2. You can use == to check if two objects reference the same thing. 
+line1 == line2 returns false for deep copy and true for shallow copy. I then
+check if line1.equals(line2) returns true because if they are copies they will
+have the same content.
+3. A deep comparison would call equals on instance fields of the objects being 
+compared. I would do .equals for the name, point1, and point2 of each of the
+two lines.
+

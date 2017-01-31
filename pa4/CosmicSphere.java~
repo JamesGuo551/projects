@@ -1,0 +1,88 @@
+/*
+ * Name: Yipeng Guo
+ * Login: cs11fadl 
+ * Date: October 18, 2016
+ * File: CosmicSphere.java
+ * Sources of Help: Object draw website with all the methods
+ *
+ * This program defines the behavior of the cosmic spheres.
+ */
+
+import objectdraw.*;
+import java.awt.*;
+
+/**
+ * This class defines what a CosmicSphere is and how it should act.
+ */
+
+public class CosmicSphere extends ActiveObject {
+  private FilledOval cosmicSphere;
+  int translate = 25; //Since the coordinates correspond to top left of sphere
+  int maxSize = 100; //Max size of sphere
+  int minSize = 25; //Min size of sphere
+  int state = 0; //To alternate between grow and shrink
+  int delay = 50; //50 millisecond delay
+  int startingSize = 50; 
+  double shrinkMove = 1; //Move the sphere so it stays centered
+  double growMove = -1; //Move the sphere so it stays centered
+  double xLoc; //xLoc to create the sphere
+  double yLoc; //yLoc to create the sphere
+  Line hLine; //Detects when line is moved to change color of sphere
+  Line vLine; //Detects when line is moved to change color of sphere
+  
+  /**
+   * CosmicSphere constructor
+   * @param the parameter functions are explained above
+   */
+  public CosmicSphere(double xLoc, double yLoc, double size, 
+		      DrawingCanvas canvas, Line hLine, Line vLine) {
+    cosmicSphere = new FilledOval(xLoc-translate, yLoc-translate, size, size,
+                                  canvas);
+    start();
+    this.xLoc = xLoc; //So I can access xLoc in run()
+    this.yLoc = yLoc; //Same reason for next three
+    this.hLine = hLine;
+    this.vLine = vLine;
+  }
+
+  /**
+   * How the sphere will act after start() method called in constructor
+   */
+  public void run() {
+    int currentSize = startingSize; //Local variable that is different for each                                     //individual sphere
+    while(true) { //runs indefinitely
+      if(xLoc < (vLine.getEnd()).getX() && yLoc < (hLine.getEnd().getY())) {
+        cosmicSphere.setColor(Color.cyan); //Quadrant 2 is cyan
+      }
+      if(xLoc < (vLine.getEnd()).getX() && yLoc >= (hLine.getEnd().getY())) {
+        cosmicSphere.setColor(Color.yellow); //Quadrant 3 is yellow
+      }
+      if(xLoc >= (vLine.getEnd()).getX() && yLoc < (hLine.getEnd().getY())) {
+        cosmicSphere.setColor(Color.magenta); //Quadrant 1 is magenta
+      }
+      if(xLoc >= (vLine.getEnd()).getX() && yLoc >= (hLine.getEnd().getY())) {
+        cosmicSphere.setColor(Color.black); //Quadrant 4 is black
+      }
+      if(state == 0 && cosmicSphere.getWidth() < maxSize) { //Growing state
+        currentSize++; //2 increments for growth of 2
+	currentSize++;
+        cosmicSphere.setSize(currentSize, currentSize); //Causes growth
+	cosmicSphere.move(growMove, growMove); //Translate so centered
+        pause(delay); //Delay makes it more viewable
+        if(cosmicSphere.getWidth() >= maxSize) { 
+          state = 1; //At max size switches to shrinking state
+        }
+      }
+      if(state == 1 && cosmicSphere.getWidth() > minSize) { //Shrinking state
+        currentSize--; //2 increments for shrink of 2
+	currentSize--;
+        cosmicSphere.setSize(currentSize, currentSize); //Causes shrinkage
+        cosmicSphere.move(shrinkMove, shrinkMove); //Translate so centered
+        pause(delay); 
+        if(cosmicSphere.getWidth() <= minSize) {
+          state = 0; //At min size switches to shrinking state
+        }
+      }
+    }
+  }
+}

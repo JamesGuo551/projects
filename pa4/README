@@ -1,0 +1,20 @@
+Description: My program starts with a blank canvas that has only an x and y
+axis on it. You can press on the lines to drag and move them around. You can
+also click anywhere to make a sphere that will then continuously shrink and
+grow. If you move the lines around at this point, they will change the color
+of the sphere depending on how the quadrants are reshaped. Quadrant 1 has
+magenta spheres, quadrant 2 has cyan spheres, quadrant 3 has yellow spheres,
+quadrant 4 has black spheres.
+
+1. I worked alone and asked any questions I had on piazza so there was no
+opportunity to cheat.
+2. cp ../../../../zumba.java .
+3. man diff pulls up the manual and describes what the diff command does in
+detail
+4. rm -rf $HOME/*.jar
+5. q! will quit with no warning while q will quit with a warning if a modified
+file has not been saved.
+6. gg will go to the first line to the first non blank character
+7. Method overloading is allowing a class to have multiple methods with the
+same name if their number of parameters or data type of paramaters or sequence
+of data type of parameters differs.

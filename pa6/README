@@ -1,0 +1,21 @@
+Description: My program lets you make cosmic spheres and control them. When
+you start the
+them do this activity again. Clear all will remove all the spheres from the
+board. The spheres change colors depending on which quadrant you're in and you
+can control these quadrans by moving lines. Everything stays in the same
+location proportionate to the canvas size if you resize it.
+
+1. vi +LineNumber fileName
+2. :syntax off and :syntax on while in command mode
+3. :help user-manual
+4. typing ":help word" then hit control-D to see matching help entries for
+"word"
+5. The call stack
+6. An interface declaration consists of modifiers, the keyword interface, the 
+interface name, a comma-separated list of parent interfaces (if any), and the 
+interface body. Modifer can be public or private and suchbut it's usually
+public since classes implement interfaces.
+7. If professional engineers cheat, then there are very serious legal
+implications such as copyright lawsuits. Also, in a theoretical world, if
+every engineer copies off of each other, then no work is produced and it's
+simply the copying of nothing so engineering is basically pointless.

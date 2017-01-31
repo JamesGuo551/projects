@@ -1,0 +1,28 @@
+program description: This is a puzzle that has 9 scrambled pieces. Click on one and drag while the mouse is held down to move a piece onto the board on the 
+left. If you move the piece close enough to the right spot, it will lock in and the board piece will become visible, showing your progress. When you complete 
+the puzzle, you can either drag the whole thing around or click on the puzzle tostart over and play again.
+
+1. In command mode, $ to move cursor to the end of the current line and 0 to 
+move curson to the beginning of the current line.
+2. To highlight the current line, :set cursorline
+3. Static means that a variable can be accessed without requiring an 
+instantiation of the class to which it belongs.
+4. It means you can call the method without creating the object to which it 
+belongs. example
+class Example {
+  public static void main(String[] args) {
+    static();  //calling without object
+    Example t = new Example(); //Or else nonstatic wont run
+    t.nonstatic();  //calling using object
+  } 
+  static void static() {
+    System.out.println("Programming is amazing.");
+  }
+  void nonstatic(){
+    System.out.println("Java is awesome.");
+  }
+}
+5. Override means overriding the functionionality of an existing method. For 
+example I overrided the equals() method of BoardPiece by casting o as a 
+PuzzlePiece object.
+6. cut -c 5-13 foo

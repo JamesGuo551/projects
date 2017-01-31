@@ -1,0 +1,51 @@
+import objectdraw.*; 
+import java.awt.*;
+
+public class PuzzlePiece implements Piece {
+  double centerDistance = 50;
+  double framedRectSize = 100;
+  double inset = 2;
+  private FramedRect framedRect1;
+  private int id;
+  private Location loc = null;
+  private Location center = null;
+  private VisibleImage image;
+  public PuzzlePiece(Image img, int id, Location loc, DrawingCanvas canvas) {
+    image = new VisibleImage(img, loc, canvas);
+    framedRect1 = new FramedRect(loc, framedRectSize, framedRectSize, canvas);
+    this.id = id;
+    this.loc = loc;
+  }
+  public void showHighlight(Color color) {
+  }
+  public void hideHighlight() {
+  }
+  public void show() {
+    image.show();
+  }
+  public void hide() {
+    image.hide();
+  }
+  public void move(double dx, double dy) {
+    image.move(dx, dy);
+    framedRect1.move(dx, dy);
+  }
+  public boolean contains(Location point) {
+    return true;
+  }
+  public boolean equals(Object o) {
+    if(this.id == ((BoardPiece)o).getId()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  public int getId() {
+    return id;
+  }
+  public Location getCenter() {
+    center = new Location(image.getLocation().getX()+centerDistance, 
+	                  image.getLocation().getY()+centerDistance);
+    return center;
+  }
+}

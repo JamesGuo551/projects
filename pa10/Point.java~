@@ -1,0 +1,118 @@
+/*
+ * Name: Yipeng Guo
+ * Login: cs11fadl 
+ * Date: December 1, 2016
+ * File: Point.java
+ * Sources of Help: Object draw website with all the methods
+ *
+ * This program defines the behavior of a Point(not the object draw one).
+ */
+
+/**
+ * My custom Point class.
+ */
+public class Point {
+  private int x; //point's x coordinate
+  private int y; //point's y coordinate
+
+  /**
+    * Constructor. Makes a point object with useless values.
+    */
+  public Point() { 
+    setX(0);
+    setY(0);
+  }
+
+  /**
+    * Constructor. Makes a copy point with given parameters.
+    * @param x is the x coordinate
+    * @param y is the y coordinate
+    */
+  public Point( int x, int y ) { 
+    setX(x);
+    setY(y);
+  }
+
+  /**
+    * Constructor. Makes a copy of the point p.
+    * @param p is the point to copy the attributes from.
+    */
+  public Point( Point p ) { 
+    setX( p.getX() );
+    setY( p.getY() );
+  }
+
+  /**
+   * getX method for point
+   */
+  public int getX() { 
+    return x;
+  }
+
+  /**
+   * getY method for point
+   */
+  public int getY() { 
+    return y;
+  }
+
+  /**
+   * sets X for point
+   * @param x is the value to set x to
+   */
+  private void setX( int x ) {
+    this.x = x;
+  } 
+
+  /** 
+   * sets Y for point
+   * @param x is the value to set y to
+   */
+  private void setY( int y ) {
+    this.y = y;
+  }
+
+  /**
+   * move method
+   * @param xDelta is the amount to move the x value of point
+   * @param yDelta is the amount to move the y value of point
+   */
+  public void move( int xDelta, int yDelta ) { 
+    x += xDelta;
+    y += yDelta;
+  }
+
+  /**
+   * to string method
+   * prints out the point name and its attributes
+   */
+  @Override
+  public String toString() { 
+    return "(" + x + "," + y + ")";
+  }
+
+  /**
+   * equals method
+   * I just check if the toString matches up because that will achieve the 
+   * check just fine.
+   * @param o is the object to check equality to
+   */
+  @Override
+  public boolean equals( Object o ) {
+    //prevent null pointer exception
+    if(o != null && this.toString().equals(o.toString())) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * hashcode method
+   * returns hashcode of my shape
+   */
+  @Override
+  public int hashCode() { 
+    return this.toString().hashCode();
+  }
+}

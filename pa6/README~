@@ -1,0 +1,10 @@
+Description: My program lets you make cosmic spheres and control them. When
+you start the
+them do this activity again. Clear all will remove all the spheres from the
+board. The spheres change colors depending on which quadrant you're in and you
+can control these quadrans by moving lines. Everything stays in the same
+location proportionate to the canvas size if you resize it.
+
+1. vi +LineNumber fileName
+2. :syntax off and :syntax on while in command mode
+3. 
